@@ -21,13 +21,13 @@ void PolyDataStruct::clear()
     }
 }
 
-size_t PolyDataStruct::size() const
-{
-    size_t sum = 0;
-    for (auto&& size_func : size_functions)
-    {
-        sum += size_func(*this);
-    }
-    // gotta be careful about this overflowing
-    return sum;
-}
+// size_t PolyDataStruct::size() const
+// {
+//     size_t sum = 0;
+//     for (auto&& size_func : size_functions)
+//     {
+//         sum += size_func(*this);
+//     }
+//     // gotta be careful about this overflowing
+//     return sum;
+// }

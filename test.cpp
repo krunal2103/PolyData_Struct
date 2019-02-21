@@ -6,12 +6,13 @@ int main(){
   c.push_back('a');
   c.push_back(10);
   c.push_back(1.25);
+  // std::cout << c.size() << std::endl;
   print_container(c);
-  c.visit(print_visitor{});
-  std::cout << std::endl;
-  c.clear();
-  std::cout << "c after clearing c: ";
-  c.visit(print_visitor{});
-  std::cout << std::endl;
+  // c.visit(print_visitor{});
+  // std::cout << std::endl;
+  // c.clear();
+  // std::cout << "c after clearing c: ";
+  // c.visit(print_visitor{});
+  // std::cout << std::endl;
   return 0;
 }

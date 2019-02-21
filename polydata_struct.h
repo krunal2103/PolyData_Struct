@@ -22,27 +22,39 @@ struct visitor_base
 struct PolyDataStruct
 {
     public:
+    // constructor
     PolyDataStruct() = default;
+
+    // copy constructor
     PolyDataStruct(const PolyDataStruct& _other)
     {
        *this = _other;
     }
 
+    // Assignment operator for object
+    // Example:
+    // PolyDataStruct a;
+    // PolyDataStruct b = a;
     PolyDataStruct& operator=(const PolyDataStruct& _other);
 
+    // Function to push data to the object similar to a vector
     template<class T>
     void push_back(const T& _t);
 
+    // Clear the object
     void clear();
 
+    // Function to tell number of elements belonging to a particular data type
     template<class T>
     size_t number_of() const;
 
-    size_t size() const;
+    // size_t size() const;
 
+    // Visits every data point in the object and performs the passed operation on it
     template<class T>
     void visit(T&& visitor);
 
+    // Destructor
     ~PolyDataStruct()
     {
         clear();
@@ -78,15 +90,6 @@ struct print_visitor : visitor_base<int, double, char, std::string>
     void operator()(T& _in)
     {
         std::cout << _in << " ";
-    }
-};
-
-struct my_visitor : visitor_base<int, double>
-{
-    template<class T>
-    void operator()(T& _in)
-    {
-        _in +=_in;
     }
 };
 
