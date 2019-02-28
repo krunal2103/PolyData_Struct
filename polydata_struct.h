@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <map>
 #include <functional>
 #include <experimental/type_traits>
 
@@ -48,6 +49,9 @@ struct PolyDataStruct
     template<class T>
     size_t number_of() const;
 
+    template<class T>
+    std::vector<T> get() const;
+
     // size_t size() const;
 
     // Visits every data point in the object and performs the passed operation on it
@@ -62,7 +66,7 @@ struct PolyDataStruct
 
     private:
     template<class T>
-    static std::unordered_map<const PolyDataStruct*, std::vector<T>> items;
+    static std::map<const PolyDataStruct*, std::vector<T>> items;
 
     template<class T, class U>
     using visit_function = decltype(std::declval<T>().operator()(std::declval<U&>()));
@@ -82,7 +86,7 @@ struct PolyDataStruct
 };
 
 template<class T>
-std::unordered_map<const PolyDataStruct*, std::vector<T>> PolyDataStruct::items;
+std::map<const PolyDataStruct*, std::vector<T>> PolyDataStruct::items;
 
 struct print_visitor : visitor_base<int, double, char, std::string>
 {

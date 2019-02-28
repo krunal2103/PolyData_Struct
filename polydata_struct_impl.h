@@ -30,6 +30,15 @@ size_t PolyDataStruct::number_of() const
     return 0;
 }
 
+template<class T>
+std::vector<T> PolyDataStruct::get() const
+{
+    auto iter = items<T>.find(this);
+    if (iter != items<T>.cend())
+        return items<T>[this];
+    return {0};
+}
+
 template<class T, template<class...> class TLIST, class... TYPES>
 void PolyDataStruct::visit_impl(T&& visitor, TLIST<TYPES...>)
 {
