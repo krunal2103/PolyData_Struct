@@ -15,7 +15,7 @@ int main(){
   // for(int i = 0; i < v.size(); i++){
   //   std::cout << v[i] << " ";
   // }
-  std::cout << c.length<int>() << std::endl;
+  // std::cout << c.length<int>() << std::endl;
   // c.visit(print_visitor{});
   // std::cout << std::endl;
   // c.clear();
