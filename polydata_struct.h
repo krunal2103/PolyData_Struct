@@ -58,6 +58,9 @@ struct PolyDataStruct
     template<class T>
     void visit(T&& visitor);
 
+    template<class T>
+    int length() const;
+
     // Destructor
     ~PolyDataStruct()
     {

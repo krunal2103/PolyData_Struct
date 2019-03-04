@@ -31,6 +31,12 @@ size_t PolyDataStruct::number_of() const
 }
 
 template<class T>
+int PolyDataStruct::length() const
+{
+  return items<T>[this].size();
+}
+
+template<class T>
 std::vector<T> PolyDataStruct::get() const
 {
     auto iter = items<T>.find(this);
