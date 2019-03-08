@@ -8,6 +8,10 @@
 #include <map>
 #include <functional>
 #include <experimental/type_traits>
+#include <variant>
+#include <any>
+
+using any_type = std::variant<int, float, double, std::string, char>;
 
 
 template<class...>
@@ -56,7 +60,9 @@ struct PolyDataStruct
 
     // Visits every data point in the object and performs the passed operation on it
     template<class T>
-    void visit(T&& visitor);
+    void visit(T&& visitor, int index = -1);
+
+    any_type at(int index);
 
     // template<class T>
     // int length() const;
@@ -73,6 +79,8 @@ struct PolyDataStruct
 
     int size;
 
+    std::any item;
+
     template<class T>
     static std::map<const PolyDataStruct*, std::map<int, T>> items;
 
@@ -82,10 +90,10 @@ struct PolyDataStruct
     static constexpr bool has_visit_v = std::experimental::is_detected<visit_function, T, U>::value;
 
     template<class T, template<class...> class TLIST, class... TYPES>
-    void visit_impl(T&& visitor, TLIST<TYPES...>);
+    void visit_impl(T&& visitor, int index, TLIST<TYPES...>);
 
     template<class T, class U>
-    void visit_impl_help(T& visitor);
+    void visit_impl_help(T& visitor, int index);
 
     std::vector<std::function<void(PolyDataStruct&)>> clear_functions;
     std::vector<std::function<void(const PolyDataStruct&, PolyDataStruct&)>> copy_functions;
@@ -102,6 +110,19 @@ struct print_visitor : visitor_base<int, double, char, std::string>
     void operator()(T& _in)
     {
         std::cout << _in.first << " " << _in.second << std::endl;
+    }
+};
+
+struct index_visitor : visitor_base<int, float, double, char, std::string>
+{
+    template<class T>
+    any_type operator()(T& _in, int index)
+    {
+        if(_in.first == index && index >= 0){
+            return _in.second;
+        }else{
+            return "NULL";
+        }
     }
 };
 

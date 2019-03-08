@@ -17,9 +17,9 @@ void PolyDataStruct::push_back(const T& _t)
 }
 
 template<class T>
-void PolyDataStruct::visit(T&& visitor)
+void PolyDataStruct::visit(T&& visitor, int index)
 {
-    visit_impl(visitor, typename std::decay_t<T>::types{});
+    visit_impl(visitor, index, typename std::decay_t<T>::types{});
 }
 
 // template<class T>
@@ -47,17 +47,25 @@ void PolyDataStruct::visit(T&& visitor)
 // }
 
 template<class T, template<class...> class TLIST, class... TYPES>
-void PolyDataStruct::visit_impl(T&& visitor, TLIST<TYPES...>)
+void PolyDataStruct::visit_impl(T&& visitor, int index, TLIST<TYPES...>)
 {
-    (..., visit_impl_help<std::decay_t<T>, TYPES>(visitor));
+    (..., visit_impl_help<std::decay_t<T>, TYPES>(visitor, index));
 }
 
 template<class T, class U>
-void PolyDataStruct::visit_impl_help(T& visitor)
+void PolyDataStruct::visit_impl_help(T& visitor, int index)
 {
-    static_assert(has_visit_v<T, U>, "Visitors must provide a visit function accepting a reference for each type");
+    // static_assert(has_visit_v<T, U>, "Visitors must provide a visit function accepting a reference for each type");
     for (auto&& element : items<U>[this])
     {
-        visitor(element);
+        any_type val = visitor(element, index);
+        if(std::holds_alternative<std::string>(val)){
+            if(std::get<std::string>(val) == "NULL"){
+              continue;
+            }
+        }else{
+            item = val;
+            break;
+        }
     }
 }

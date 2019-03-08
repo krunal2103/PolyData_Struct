@@ -13,6 +13,13 @@ PolyDataStruct& PolyDataStruct::operator=(const PolyDataStruct& _other)
     return *this;
 }
 
+any_type PolyDataStruct::at(int index){
+    visit(index_visitor{}, index);
+    any_type temp = std::any_cast<any_type>(item);
+    item.reset();
+    return temp;
+}
+
 void PolyDataStruct::clear()
 {
     for (auto&& clear_func : clear_functions)
