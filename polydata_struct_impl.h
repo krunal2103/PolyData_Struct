@@ -45,6 +45,12 @@ T PolyDataStruct::get(int index) {
     return result;
 }
 
+template<class T>
+void PolyDataStruct::set_item(T v)
+{
+    item = v;
+}
+
 template<class T, template<class...> class TLIST, class... TYPES>
 void PolyDataStruct::visit_impl(T&& visitor, int index, TLIST<TYPES...>)
 {
@@ -54,7 +60,6 @@ void PolyDataStruct::visit_impl(T&& visitor, int index, TLIST<TYPES...>)
 template<class T, class U>
 void PolyDataStruct::visit_impl_help(T& visitor, int index)
 {
-    // static_assert(has_visit_v<T, U>, "Visitors must provide a visit function accepting a reference for each type");
     for (auto&& element : items<U>[this])
     {
         any_type val = visitor(element, index);
@@ -63,7 +68,7 @@ void PolyDataStruct::visit_impl_help(T& visitor, int index)
               continue;
             }
         }else{
-            item = val;
+            set_item(val);
             break;
         }
     }

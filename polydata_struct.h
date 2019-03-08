@@ -68,6 +68,9 @@ public:
 
     int length() const;
 
+    template<class T>
+    void set_item(T v);
+
     // Destructor
     ~PolyDataStruct()
     {
@@ -105,7 +108,7 @@ std::map<const PolyDataStruct*, std::map<int, T>> PolyDataStruct::items;
 struct print_visitor : visitor_base<int, double, char, std::string>
 {
     template<class T>
-    void operator()(T& _in)
+    any_type operator()(T& _in, int index)
     {
         std::cout << _in.first << " " << _in.second << std::endl;
     }
