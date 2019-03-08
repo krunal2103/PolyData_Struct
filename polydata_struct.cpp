@@ -26,6 +26,25 @@ int PolyDataStruct::length() const
   return size;
 }
 
+bool PolyDataStruct::empty() const
+{
+    if(size == 0)
+      return true;
+    else
+      return false;
+}
+
+void PolyDataStruct::display()
+{
+  for(int i = 0; i < size; i++){
+    any_type val = at(i);
+    std::visit([](auto&& arg) {
+        std::cout << arg << " ";
+    }, val);
+  }
+  std::cout << std::endl;
+}
+
 void PolyDataStruct::clear()
 {
     for (auto&& clear_func : clear_functions)
@@ -33,14 +52,3 @@ void PolyDataStruct::clear()
         clear_func(*this);
     }
 }
-
-// size_t PolyDataStruct::size() const
-// {
-//     size_t sum = 0;
-//     for (auto&& size_func : size_functions)
-//     {
-//         sum += size_func(*this);
-//     }
-//     // gotta be careful about this overflowing
-//     return sum;
-// }

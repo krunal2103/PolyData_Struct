@@ -22,14 +22,14 @@ void PolyDataStruct::visit(T&& visitor, int index)
     visit_impl(visitor, index, typename std::decay_t<T>::types{});
 }
 
-// template<class T>
-// size_t PolyDataStruct::number_of() const
-// {
-//     auto iter = items<T>.find(this);
-//     if (iter != items<T>.cend())
-//         return items<T>[this].size();
-//     return 0;
-// }
+template<class T>
+size_t PolyDataStruct::number_of() const
+{
+    auto iter = items<T>.find(this);
+    if (iter != items<T>.cend())
+        return items<T>[this].size();
+    return 0;
+}
 
 
 template<class T>

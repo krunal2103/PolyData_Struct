@@ -26,7 +26,7 @@ struct visitor_base
 
 struct PolyDataStruct
 {
-    public:
+public:
     // constructor
     PolyDataStruct():size(0) {};
 
@@ -50,13 +50,15 @@ struct PolyDataStruct
     void clear();
 
     // Function to tell number of elements belonging to a particular data type
-    // template<class T>
-    // size_t number_of() const;
+    template<class T>
+    size_t number_of() const;
 
     template<class T>
     T get(int index);
 
-    // size_t size() const;
+    bool empty() const;
+
+    void display();
 
     // Visits every data point in the object and performs the passed operation on it
     template<class T>
@@ -72,10 +74,7 @@ struct PolyDataStruct
         clear();
     }
 
-    private:
-    // template<class T>
-    // static std::map<const PolyDataStruct*, std::vector<T>> items;
-
+private:
     int size;
 
     std::any item;
