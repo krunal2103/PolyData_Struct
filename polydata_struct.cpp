@@ -20,6 +20,12 @@ any_type PolyDataStruct::at(int index){
     return temp;
 }
 
+
+int PolyDataStruct::length() const
+{
+  return size;
+}
+
 void PolyDataStruct::clear()
 {
     for (auto&& clear_func : clear_functions)

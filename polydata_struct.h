@@ -53,8 +53,8 @@ struct PolyDataStruct
     // template<class T>
     // size_t number_of() const;
 
-    // template<class T>
-    // std::vector<T> get() const;
+    template<class T>
+    T get(int index);
 
     // size_t size() const;
 
@@ -64,8 +64,7 @@ struct PolyDataStruct
 
     any_type at(int index);
 
-    // template<class T>
-    // int length() const;
+    int length() const;
 
     // Destructor
     ~PolyDataStruct()

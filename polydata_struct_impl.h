@@ -31,20 +31,19 @@ void PolyDataStruct::visit(T&& visitor, int index)
 //     return 0;
 // }
 
-// template<class T>
-// int PolyDataStruct::length() const
-// {
-//   return items<T>[this].size();
-// }
 
-// template<class T>
-// std::vector<T> PolyDataStruct::get() const
-// {
-//     auto iter = items<T>.find(this);
-//     if (iter != items<T>.cend())
-//         return items<T>[this];
-//     return {0};
-// }
+template<class T>
+T PolyDataStruct::get(int index) {
+    T result{0};
+    any_type val = at(index);
+    try {
+      result = std::get<T>(val);
+    }
+    catch (std::bad_variant_access&) {
+      std::cout << "Expected type of element is different from the type of element present in the container!\n";
+    }
+    return result;
+}
 
 template<class T, template<class...> class TLIST, class... TYPES>
 void PolyDataStruct::visit_impl(T&& visitor, int index, TLIST<TYPES...>)
