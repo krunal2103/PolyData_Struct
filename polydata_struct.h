@@ -26,6 +26,15 @@ struct visitor_base
 
 struct PolyDataStruct
 {
+private:
+    struct proxy{
+        proxy(PolyDataStruct *polyDataStruct, int i) : polyDataStruct(polyDataStruct), i(i) {}
+        PolyDataStruct *polyDataStruct;
+        int i;
+
+        template<typename T>
+        operator T() {return polyDataStruct->get<T>(i);}
+    };
 public:
     // constructor
     PolyDataStruct():size(0) {};
@@ -56,6 +65,8 @@ public:
     template<class T>
     T get(int index);
 
+    proxy operator[](int index){return proxy(this, index);}
+
     bool empty() const;
 
     void display();
@@ -85,10 +96,10 @@ private:
     template<class T>
     static std::map<const PolyDataStruct*, std::map<int, T>> items;
 
-    template<class T, class U>
-    using visit_function = decltype(std::declval<T>().operator()(std::declval<U&>()));
-    template<class T, class U>
-    static constexpr bool has_visit_v = std::experimental::is_detected<visit_function, T, U>::value;
+//    template<class T, class U>
+//    using visit_function = decltype(std::declval<T>().operator()(std::declval<U&>()));
+//    template<class T, class U>
+//    static constexpr bool has_visit_v = std::experimental::is_detected<visit_function, T, U>::value;
 
     template<class T, template<class...> class TLIST, class... TYPES>
     void visit_impl(T&& visitor, int index, TLIST<TYPES...>);
@@ -105,14 +116,14 @@ private:
 template<class T>
 std::map<const PolyDataStruct*, std::map<int, T>> PolyDataStruct::items;
 
-struct print_visitor : visitor_base<int, double, char, std::string>
-{
-    template<class T>
-    any_type operator()(T& _in, int index)
-    {
-        std::cout << _in.first << " " << _in.second << std::endl;
-    }
-};
+//struct print_visitor : visitor_base<int, double, char, std::string>
+//{
+//    template<class T>
+//    any_type operator()(T& _in, int index)
+//    {
+//        std::cout << _in.first << " " << _in.second << std::endl;
+//    }
+//};
 
 struct index_visitor : visitor_base<int, float, double, char, std::string>
 {

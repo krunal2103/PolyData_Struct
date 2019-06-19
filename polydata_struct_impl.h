@@ -66,6 +66,9 @@ void PolyDataStruct::visit_impl_help(T& visitor, int index)
         if(std::holds_alternative<std::string>(val)){
             if(std::get<std::string>(val) == "NULL"){
               continue;
+            }else{
+                set_item(val);
+                break;
             }
         }else{
             set_item(val);
