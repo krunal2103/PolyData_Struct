@@ -15,7 +15,7 @@ PolyDataStruct& PolyDataStruct::operator=(const PolyDataStruct& _other)
 
 any_type PolyDataStruct::at(int index){
     visit(index_visitor{}, index);
-    any_type temp = std::any_cast<any_type>(item);
+    auto temp = std::any_cast<any_type>(item);
     item.reset();
     return temp;
 }
@@ -28,10 +28,7 @@ int PolyDataStruct::length() const
 
 bool PolyDataStruct::empty() const
 {
-    if(size == 0)
-      return true;
-    else
-      return false;
+    return size == 0;
 }
 
 void PolyDataStruct::display()

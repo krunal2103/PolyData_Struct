@@ -28,7 +28,7 @@ size_t PolyDataStruct::number_of() const
     auto iter = items<T>.find(this);
     if (iter != items<T>.cend())
         return items<T>[this].size();
-    return 0;
+    else return 0;
 }
 
 

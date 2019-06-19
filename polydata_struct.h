@@ -78,7 +78,7 @@ public:
     }
 
 private:
-    int size;
+    int size{};
 
     std::any item;
 
