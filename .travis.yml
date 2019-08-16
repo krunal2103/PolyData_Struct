@@ -1,0 +1,12 @@
+language: cpp
+
+compiler: gcc
+
+os: linux
+dist: bionic
+
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
