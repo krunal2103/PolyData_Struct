@@ -16,10 +16,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5110cb6c-5806-49dc-8f4d-a766b97aa962" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polydata_struct.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/polydata_struct.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polydata_struct.h" beforeDir="false" afterPath="$PROJECT_DIR$/polydata_struct.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/polydata_struct_impl.h" beforeDir="false" afterPath="$PROJECT_DIR$/polydata_struct_impl.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +118,7 @@
       <workItem from="1560962542245" duration="488000" />
       <workItem from="1560963177923" duration="7968000" />
       <workItem from="1561571272869" duration="16000" />
-      <workItem from="1621179709144" duration="1566000" />
+      <workItem from="1621179709144" duration="1734000" />
     </task>
     <task id="LOCAL-00001" summary="Code cleanup">
       <created>1560963379257</created>
